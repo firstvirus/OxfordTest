@@ -5,10 +5,12 @@ namespace app\modules\OxfordTest\controllers;
 use yii;
 use yii\helpers\Url;
 use yii\web\Controller;
-use app\modules\OxfordTest\models\Answers;
-use app\modules\OxfordTest\models\Questions;
-use app\modules\OxfordTest\models\UserForm;
-use app\modules\OxfordTest\models\Users;
+use app\modules\OxfordTest\models\{
+    Answers,
+    Questions,
+    UserForm,
+    Users
+};
 
 /**
  * Описание UserController
@@ -21,7 +23,8 @@ use app\modules\OxfordTest\models\Users;
  *
  * @author virus
  */
-class UserController extends Controller {
+class UserController extends Controller
+{
 
     /**
      * public function actionIndex()
@@ -30,7 +33,8 @@ class UserController extends Controller {
      * 
      * @return string
      */
-    public function actionIndex() {
+    public function actionIndex()
+    {
         if (Yii::$app->user->isGuest) {
             // Проверка на гостя
             $userModel = new UserForm();
@@ -39,7 +43,7 @@ class UserController extends Controller {
                     // Ищем пользователя
                     $response = UserForm::find()->where([
                                 'username' => $userModel->username,
-                                'sirname' => $userModel->sirname,
+                                'surname' => $userModel->surname,
                                 'age' => $userModel->age,
                             ])->one();
                     // Если не находим, то регистрируем
@@ -80,10 +84,11 @@ class UserController extends Controller {
      * Метод реализует вывод первого вопроса из списка, на который не дан ответ.
      * Если все ответы даны, предупреждает об этом пользователя.
      * 
+     * @param int $id
      * @return string 
      */
-
-    public function actionQuestions($id = 1) {
+    public function actionQuestions($id = 1)
+    {
         $user = UserForm::findOne(Yii::$app->user->identity->id);
         // Выясняем на какой вопрос последним был дан ответ
         if ($user->last_question < $id) {
@@ -97,7 +102,7 @@ class UserController extends Controller {
             $new = 0;
         }
         // Если вопросы кончились, пишем об этом, иначе находим текст вопроса
-        if ($id > 200 || $user->last_question == 200) {
+        if ($id > Questions::QUESTIONS_COUNT || $user->last_question == Questions::QUESTIONS_COUNT) {
             $questions['question'] = 'Вы ответили на все вопросы. За результатом обратитесь к администратору сайта.';
         } else {
             $questions = Questions::findOne($id);
@@ -112,8 +117,8 @@ class UserController extends Controller {
      * 
      * @return string
      */
-
-    public function actionQuestion() {
+    public function actionQuestion()
+    {
         if (Yii::$app->request->isAjax) {
             // Находим пользователя и декодируем данные из $_POST
             $user = UserForm::findOne(Yii::$app->user->identity->id);
@@ -157,13 +162,13 @@ class UserController extends Controller {
             }
             // Если пользователь не ответил на последний вопрос, то выводим
             // ему эти самые вопросы. По одному.
-            if ($data['id'] <= 200) {
+            if ($data['id'] <= Questions::QUESTIONS_COUNT) {
                 $questions = Questions::findOne($data['id']);
                 $data['question'] = $questions['question'];
                 $data['new'] = $new;
             } else {
                 // Иначе сообщаем, что вопросы кончились.
-                $data['id'] == 201;
+                $data['id'] == Questions::QUESTIONS_COUNT + 1;
                 $data['question'] = 'Вы ответили на все вопросы. За результатом обратитесь к администратору сайта.';
                 $user->date = date('Y-m-d H:i:s');
                 $user->save();

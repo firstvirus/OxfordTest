@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <tr class="clickable">
                 <th scope="row"><?= $user['id'] ?></th>
                 <td><?= $user['username'] ?></td>
-                <td><?= $user['sirname'] ?></td>
+                <td><?= $user['surname'] ?></td>
                 <td><?= $user['age'] ?></td>
                 <td><?= $user['last_question'] / 2 . '%' ?></td>
                 <td><?= (isset($user['date'])) ? date('d F Y', strtotime($user['date'])) . ' года' : '&nbsp;' ?></td>

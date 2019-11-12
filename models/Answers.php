@@ -12,23 +12,27 @@ use yii\db\ActiveRecord;
  * 
  * @author virus
  */
-class Answers extends ActiveRecord {
+class Answers extends ActiveRecord
+{
 
     /**
      * {@inheritdoc}
      */
-    public static function tableName() {
+    public static function tableName()
+    {
         return 'oxford_test_answers';
     }
 
-    public function formName() {
+    public function formName()
+    {
         return 'answer';
     }
 
     /**
      * {@inheritdoc}
      */
-    public function rules() {
+    public function rules()
+    {
         return [
             [['id_client', 'id_question', 'answer'], 'required'],
             [['id_client'], 'integer', 'min' => 1],

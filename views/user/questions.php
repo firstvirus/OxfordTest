@@ -6,7 +6,9 @@ use yii\helpers\Url;
 $this->title = 'Вопросы';
 $this->params['breadcrumbs'][] = $this->title;
 
-if (!isset($questions['id'])) { $questions['id'] = 201; }
+if (!isset($questions['id'])) {
+    $questions['id'] = 201;
+}
 ?>
 
 <div class="jumbotron">
@@ -43,38 +45,38 @@ if (!isset($questions['id'])) { $questions['id'] = 201; }
     </div>
     <div class="row">
         <p id="question">
-            <?= $questions['question']; ?>
+<?= $questions['question']; ?>
         </p>
     </div>
 
-    <?php if (($questions['id'] >= 1) && ($questions['id'] <= 200)) { ?>
+<?php if (($questions['id'] >= 1) && ($questions['id'] <= 200)) { ?>
         <div class="row" id="answers">
             <div class="col-sm-4"></div>
             <div class="col-sm-4">
-                <?= Html::button('Да', ['value' => 'Y', 'class' => 'btn btn-default btn-block']) ?>
+    <?= Html::button('Да', ['value' => 'Y', 'class' => 'btn btn-default btn-block']) ?>
             </div>
             <div class="col-sm-4"></div>
         </div>
         <div class="row" id="answers">
             <div class="col-sm-4"></div>
             <div class="col-sm-4">
-                <?= Html::button('Может быть', ['value' => 'M', 'class' => 'btn btn-default btn-block']) ?>
+    <?= Html::button('Может быть', ['value' => 'M', 'class' => 'btn btn-default btn-block']) ?>
             </div>
             <div class="col-sm-4"></div>
         </div>
         <div class="row" id="answers">
             <div class="col-sm-4"></div>
             <div class="col-sm-4">
-                <?= Html::button('Нет', ['value' => 'N', 'class' => 'btn btn-default btn-block']) ?>
+    <?= Html::button('Нет', ['value' => 'N', 'class' => 'btn btn-default btn-block']) ?>
             </div>
             <div class="col-sm-4"></div>
         </div>
-    <div class="row">
-        <div class="progress">
-            <div class="progress-bar" role="progressbar" style="width: <?= ($questions['id'] - 1) / 2 ?>%" aria-valuenow="<?= $questions['id'] ?>" aria-valuemin="0" aria-valuemax="200"></div>
-        </div>
-    </div>    
-    <?php } ?>
+        <div class="row">
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" style="width: <?= ($questions['id'] - 1) / 2 ?>%" aria-valuenow="<?= $questions['id'] ?>" aria-valuemin="0" aria-valuemax="200"></div>
+            </div>
+        </div>    
+<?php } ?>
 </div>
 
 <?php
@@ -145,3 +147,4 @@ if ($questions['id'] <= 200) {
 
     $this->registerJs($js);
 }
+?>

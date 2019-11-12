@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 
 $this->title = 'Оксфордский тест личности | ' . $user->username . ' ' .
-        $user->sirname . ' | Результаты';
+        $user->surname . ' | Результаты';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="col-sm-3"><?=
@@ -66,3 +66,4 @@ if (isset($user->last_question) && ($user->last_question == 200)) {
 JS;
     $this->registerJs($js);
 }
+?>

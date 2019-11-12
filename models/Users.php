@@ -14,58 +14,66 @@ use yii\db\ActiveRecord;
  *
  * @author virus
  */
-class Users extends ActiveRecord implements \yii\web\IdentityInterface {
+class Users extends ActiveRecord implements \yii\web\IdentityInterface
+{
 
     /**
      * public static function tableName()
      * Возвращает имя таблицы пользователей
      * @return string
      */
-    public static function tableName() {
+    public static function tableName()
+    {
         return 'oxford_test_users';
     }
 
     /**
      * {@inheritdoc}
      */
-    public static function findIdentity($id) {
+    public static function findIdentity($id)
+    {
         return static::findOne($id);
     }
 
     /**
      * {@inheritdoc}
      */
-    public static function findIdentityByAccessToken($token, $type = null) {
+    public static function findIdentityByAccessToken($token, $type = null)
+    {
         return null;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getAuthKey() {
+    public function getAuthKey()
+    {
         return $this->auth_key;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function validateAuthKey($authKey) {
+    public function validateAuthKey($authKey)
+    {
         return $this->auth_key === $authKey;
     }
 
     /**
      * Возвращает роль конкретного пользователя.
-     * @param type $id
-     * @return type
+     * @param int $id
+     * @return string
      */
-    public function getRole($id) {
+    public function getRole($id)
+    {
         $roles = Yii::$app->authManager->getRolesByUser($id);
         foreach ($roles as $role) {
             return $role->name;

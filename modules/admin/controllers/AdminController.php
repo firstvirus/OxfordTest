@@ -5,9 +5,11 @@ namespace app\modules\OxfordTest\modules\admin\controllers;
 use yii;
 use yii\web\Controller;
 use yii\filters\AccessControl;
-use app\modules\OxfordTest\models\Answers;
-use app\modules\OxfordTest\models\Questions;
-use app\modules\OxfordTest\models\Users;
+use app\modules\OxfordTest\models\{
+    Answers,
+    Questions,
+    Users
+};
 
 /**
  * Описание AdminController
@@ -21,7 +23,8 @@ use app\modules\OxfordTest\models\Users;
  *
  * @author virus
  */
-class AdminController extends Controller {
+class AdminController extends Controller
+{
 
     /**
      * public function behaviors()
@@ -30,7 +33,8 @@ class AdminController extends Controller {
      * 
      * @return array Содержит набор правил
      */
-    public function behaviors() {
+    public function behaviors()
+    {
         return [
             'access' => [
                 'class' => AccessControl::className(),
@@ -51,7 +55,8 @@ class AdminController extends Controller {
      * 
      * @return string
      */
-    public function actionIndex() {
+    public function actionIndex()
+    {
         Yii::$app->formatter->locale = 'ru-RU';
 
         $users = Users::find()->all();
@@ -68,7 +73,8 @@ class AdminController extends Controller {
      * 
      * @return string
      */
-    public function actionAnswers($id = 1) {
+    public function actionAnswers($id = 1)
+    {
         Yii::$app->formatter->locale = 'ru-RU';
         // Находим все ответы, принадлежащие пользователю
         $ids = array();
@@ -115,7 +121,8 @@ class AdminController extends Controller {
      * 
      * @return string Строка запроса на дешифровку
      */
-    public function actionResult() {
+    public function actionResult()
+    {
         if (Yii::$app->request->isAjax) {
             $idUser = Yii::$app->request->post('id');
             $user = Users::findOne($idUser);

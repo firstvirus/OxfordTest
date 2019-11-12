@@ -12,25 +12,28 @@ use yii\db\ActiveRecord;
  * 
  * @author virus
  */
-class Questions extends ActiveRecord {
+class Questions extends ActiveRecord
+{
 
     /**
      * Количество вопросов задается тут
-     * @var type 
+     * @const
      */
     const QUESTIONS_COUNT = 200;
 
     /**
      * {@inheritdoc}
      */
-    public static function tableName() {
+    public static function tableName()
+    {
         return 'oxford_test_questions';
     }
 
     /**
      * {@inheritdoc}
      */
-    public function rules() {
+    public function rules()
+    {
         return [
             [['question'], 'required'],
             [['question'], 'string'],
@@ -40,7 +43,8 @@ class Questions extends ActiveRecord {
     /**
      * {@inheritdoc}
      */
-    public function attributeLabels() {
+    public function attributeLabels()
+    {
         return [
             'id' => 'ID',
             'question' => 'Question',

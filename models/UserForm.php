@@ -14,11 +14,12 @@ use yii\db\ActiveRecord;
  * 
  * @author virus
  */
-class UserForm extends ActiveRecord {
+class UserForm extends ActiveRecord
+{
 
     /**
      * Копия класса с интерфейсом IdentityInterface
-     * @var type 
+     * @var object 
      */
     private $_user;
 
@@ -27,42 +28,46 @@ class UserForm extends ActiveRecord {
      * Возвращает имя таблицы пользователей
      * @return string
      */
-    public static function tableName() {
+    public static function tableName()
+    {
         return 'oxford_test_users';
     }
 
     /**
      * Возвращает массив с аттрибутами для формы аутентификации
-     * @return type
+     * @return array
      */
-    public function attributeLabels() {
+    public function attributeLabels()
+    {
         return [
             'username' => 'Имя',
-            'sirname' => 'Фамилия',
+            'surname' => 'Фамилия',
             'age' => 'Возраст',
         ];
     }
 
     /**
      * Возвращает массив с правилами валидации данных о пользователе
-     * @return type
+     * @return array
      */
-    public function rules() {
+    public function rules()
+    {
         return [
-            [['username', 'sirname', 'age'], 'required', 'message' => 'Поле не должно быть пустым.'],
-            [['username', 'sirname', 'age'], 'trim'],
+            [['username', 'surname', 'age'], 'required', 'message' => 'Поле не должно быть пустым.'],
+            [['username', 'surname', 'age'], 'trim'],
             ['username', 'string', 'length' => [2, 30]],
-            ['sirname', 'string', 'length' => [1, 50]],
+            ['surname', 'string', 'length' => [1, 50]],
         ];
     }
 
     /**
      * Перед сохранением нового пользователя генерирует ключ
      * автоматического входа
-     * @param type $insert
+     * @param object $insert
      * @return boolean
      */
-    public function beforeSave($insert) {
+    public function beforeSave($insert)
+    {
         if (parent::beforeSave($insert)) {
             if ($this->isNewRecord) {
                 $this->auth_key = \Yii::$app->security->generateRandomString();
@@ -73,12 +78,13 @@ class UserForm extends ActiveRecord {
     }
 
     /**
-     * Возвращает копию классас интерфейсом IdentityInterface для
+     * Возвращает копию класса с интерфейсом IdentityInterface для
      * аутентификации пользователя
-     * @param type $id
-     * @return type
+     * @param int $id
+     * @return object
      */
-    public function login($id) {
+    public function login($id)
+    {
         $this->_user = Users::findIdentity($id);
 
         return $this->_user;
