@@ -143,7 +143,7 @@ if ($questions['id'] <= 200) {
                 }
             });
         }
-    JS;
+JS;
 
     $this->registerJs($js);
 }

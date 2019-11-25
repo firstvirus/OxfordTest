@@ -49,7 +49,7 @@ class UserController extends Controller
                     // Если не находим, то регистрируем
                     if ($response === null) {
                         $userModel->save();
-                        $role = Yii::$app->authManager - getRole('user');
+                        $role = Yii::$app->authManager->getRole('user');
                         Yii::$app->authManager->assign($role, $userModel->id);
                     } else {
                         // Если находим, то переводим на аутентификацию

@@ -13,7 +13,7 @@ class m191104_082736_user_table extends Migration {
     public function safeUp() {
         $this->createTable('oxford_test_users', [
             'id' => $this->primaryKey(),
-            'name' => $this->string(30),
+            'username' => $this->string(30),
             'surname' => $this->string(50),
             'age' => $this->integer(3),
             'answer' => $this->text(),
